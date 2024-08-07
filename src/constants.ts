@@ -7,6 +7,7 @@ import {
   blueDark,
   redDark,
   greenDark,
+  blackA,
 } from "@radix-ui/colors";
 
 // Create your theme
@@ -18,6 +19,8 @@ export const theme = {
     ...green,
   },
   iconColor: gray.gray11,
+  iconBackground: gray.gray3,
+  overlayColors: blackA.blackA7,
 };
 
 // Create your dark theme
@@ -29,6 +32,9 @@ export const darkTheme = {
     ...greenDark,
   },
   iconColor: grayDark.gray11,
+  iconBackground: grayDark.gray3,
+  overlayColors: blackA.blackA9,
+  overlayContentBackground: grayDark.gray2,
 };
 
 // Values in pixels:
@@ -45,4 +51,7 @@ export const QUERIES = {
   desktopAndUp: `(min-width: ${BREAKPOINTS.desktopMin / 16}rem)`,
 };
 
-export const IconSize = 24;
+export const IconSize = {
+  sm: 16,
+  md: 24,
+};
