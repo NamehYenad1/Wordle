@@ -2,22 +2,34 @@ import * as RadixDialog from "@radix-ui/react-dialog";
 
 import styled, { keyframes } from "styled-components";
 import { X } from "lucide-react";
-import IconButton from "../IconButton";
 import { IconSize } from "../../constants";
 
 import React from "react";
 import UnstyledButton from "../UnstyledButton";
 
 interface Props {
-  trigger: React.ReactNode;
+  trigger?: React.ReactNode;
   children: React.ReactNode;
   title: string;
   description: string;
+  controlled?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
-const Dialog = ({ trigger, title, description, children }: Props) => {
+const Dialog = ({
+  controlled = false,
+  open,
+  onOpenChange,
+  trigger,
+  title,
+  description,
+  children,
+}: Props) => {
   return (
-    <RadixDialog.Root>
-      <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
+    <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
+      {controlled && (
+        <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
+      )}
       <RadixDialog.Portal>
         <StyledOverlay className="dialog-overlay" />
         <StyledContent className="dialog-content">

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CircleHelp, Settings, ChartColumnBig, SunMoon } from "lucide-react";
+import { CircleHelp, SunMoon } from "lucide-react";
 import { IconSize } from "../../constants";
 
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
@@ -38,6 +38,7 @@ const Header = ({ updateTheme }: Props) => {
 };
 
 const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.headerColor};
   display: flex;
   grid-area: header;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};

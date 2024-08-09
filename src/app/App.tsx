@@ -33,6 +33,7 @@ const AppWrapper = styled.div`
     "header"
     "main"
     "footer";
+  height: 100%;
 `;
 
 export default App;

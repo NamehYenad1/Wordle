@@ -24,8 +24,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.gray1};
-    color: ${({ theme }) => theme.colors.gray12};
+    background-color: ${({ theme }) => theme.backgroundColor};
+    color: ${({ theme }) => theme.inputColor};
     height:100%;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -47,6 +47,9 @@ const GlobalStyle = createGlobalStyle`
 
   #root, #__next {
     isolation: isolate;
+  }
+  #root{
+    height:100%
   }
 `;
 
