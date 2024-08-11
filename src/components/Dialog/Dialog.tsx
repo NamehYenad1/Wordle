@@ -27,7 +27,7 @@ const Dialog = ({
 }: Props) => {
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
-      {controlled && (
+      {!controlled && (
         <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
       )}
       <RadixDialog.Portal>
@@ -37,7 +37,7 @@ const Dialog = ({
           <RadixDialog.Description>{description}</RadixDialog.Description>
           {children}
           <StyledCloseButton asChild>
-            <UnstyledButton>
+            <UnstyledButton title="close button">
               <X size={IconSize.sm} />
             </UnstyledButton>
           </StyledCloseButton>
@@ -90,6 +90,10 @@ const StyledCloseButton = styled(RadixDialog.Close)`
     transform: scale(1.1);
     transition: transform 100ms;
   }
+
+  &:focus {
+    outline: 2px solid ${({ theme }) => theme.focusRing};
+    border-radius: 1px;
 `;
 
 export default Dialog;

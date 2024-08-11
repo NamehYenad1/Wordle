@@ -1,28 +1,34 @@
 import React from "react";
 import styled from "styled-components";
-import validateAndSetInput from "../../../helpers/validateInput";
 
 interface Props {
   addGuess: (guess: string) => void;
-  correctWord: string;
+  currentGuess: string;
+  handleInputChange: (value: string) => void;
 }
-const InputForm = ({ addGuess }: Props) => {
-  const [input, setInput] = React.useState<string>("");
+const InputForm = ({ addGuess, currentGuess, handleInputChange }: Props) => {
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        addGuess(input);
-        setInput("");
+        addGuess(currentGuess);
+        handleInputChange("");
       }}
     >
       <InputWrapper>
         <label htmlFor="guess-input">Enter guess:</label>
         <StyledInput
           id="guess-input"
-          value={input}
+          type="text"
+          value={currentGuess}
+          required
+          minLength={5}
+          maxLength={5}
+          pattern="[a-zA-Z]{5}"
+          title="5 letter word"
           onChange={(event) => {
-            validateAndSetInput(event.target.value, setInput);
+            const nextGuess = event.target.value.toUpperCase();
+            handleInputChange(nextGuess);
           }}
         />
       </InputWrapper>

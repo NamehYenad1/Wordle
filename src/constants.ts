@@ -3,12 +3,14 @@ import {
   slate,
   blue,
   red,
+  amber,
   green,
   slateDark,
   grayDark,
   blueDark,
   redDark,
   greenDark,
+  amberDark,
   blackA,
 } from "@radix-ui/colors";
 
@@ -19,6 +21,7 @@ export const theme = {
     ...blue,
     ...red,
     ...green,
+    ...amber,
   },
   iconColor: gray.gray11,
   iconBackground: gray.gray3,
@@ -29,6 +32,8 @@ export const theme = {
   backgroundColor: slate.slate1,
   headerColor: gray.gray1,
   inputColor: gray.gray12,
+  correctInput: green.green6,
+  misplacedInput: amber.amber6,
 };
 
 // Create your dark theme
@@ -38,6 +43,7 @@ export const darkTheme = {
     ...blueDark,
     ...redDark,
     ...greenDark,
+    ...amberDark,
   },
   iconColor: grayDark.gray11,
   iconBackground: grayDark.gray3,
@@ -49,6 +55,8 @@ export const darkTheme = {
   backgroundColor: slateDark.slate1,
   headerColor: grayDark.gray1,
   inputColor: grayDark.gray12,
+  correctInput: greenDark.green6,
+  misplacedInput: amberDark.amber6,
 };
 
 // Values in pixels:
