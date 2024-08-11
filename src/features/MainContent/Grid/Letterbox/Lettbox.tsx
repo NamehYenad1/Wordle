@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -80,7 +80,11 @@ const Wrapper = styled.div<{
       ? props.theme.inputBorder
       : "transparent"};
   animation: ${(props) =>
-    props.$flipped ? `${flip} 0.5s ease forwards` : "none"};
+    props.$flipped
+      ? css`
+          ${flip} 0.5s ease forwards
+        `
+      : "none"};
 `;
 
 export default Letterbox;

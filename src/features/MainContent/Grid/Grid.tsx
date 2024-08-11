@@ -1,6 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Letterbox from "./Letterbox";
-import React from "react";
 
 interface Props {
   guesses: string[][];
@@ -81,7 +80,11 @@ const RowWrapper = styled.div<{ $animateShake: boolean }>`
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   animation: ${(props) =>
-    props.$animateShake ? `${shakeAnimation} 0.5s ease` : "unset"};
+    props.$animateShake
+      ? css`
+          ${shakeAnimation} 0.5s ease
+        `
+      : "unset"};
 `;
 
 export default Grid;
