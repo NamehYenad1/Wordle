@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import GlobalStyle from "./GlobalStyles";
 import { ThemeProvider } from "styled-components";
@@ -7,6 +7,9 @@ import styled from "styled-components";
 import Header from "../features/Header";
 import Footer from "../features/Footer";
 import MainContent from "../features/MainContent";
+import { Provider } from "react-redux";
+import store from "../stores/store";
+import ToastProvider from "../components/Toast";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -14,14 +17,17 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={darkMode ? darkTheme : theme}>
-        <GlobalStyle />
-        <AppWrapper>
-          <Header updateTheme={updateTheme}></Header>
-          <MainContent></MainContent>
-          <Footer></Footer>
-        </AppWrapper>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={darkMode ? darkTheme : theme}>
+          <ToastProvider />
+          <GlobalStyle />
+          <AppWrapper>
+            <Header updateTheme={updateTheme}></Header>
+            <MainContent></MainContent>
+            <Footer></Footer>
+          </AppWrapper>
+        </ThemeProvider>
+      </Provider>
     </>
   );
 }
