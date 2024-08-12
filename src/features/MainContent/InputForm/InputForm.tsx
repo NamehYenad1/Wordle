@@ -12,7 +12,6 @@ const InputForm = ({ addGuess, currentGuess, handleInputChange }: Props) => {
       onSubmit={(event) => {
         event.preventDefault();
         addGuess(currentGuess);
-        handleInputChange("");
       }}
     >
       <InputWrapper>

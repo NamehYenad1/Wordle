@@ -2396,7 +2396,7 @@ export const wordsArray = [
   "artsy",
   "rural",
   "shave",
-];
+].map((word) => word.toUpperCase());
 
 // Set for fast lookup
 export const wordsSet = new Set(wordsArray);

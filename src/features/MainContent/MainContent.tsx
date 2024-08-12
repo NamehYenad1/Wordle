@@ -5,8 +5,12 @@ import { wordsArray, wordsSet } from "../../constants";
 import Confetti from "react-confetti";
 import Dialog from "../../components/Dialog";
 import Grid from "./Grid";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../stores/store";
+import { toastAdded } from "../../stores/slices/toastSlice";
 
 const MainContent = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const [correctWord, setCorrectWord] = React.useState<string>(
     wordsArray[Math.floor(Math.random() * wordsArray.length)].toUpperCase()
   );
@@ -29,9 +33,15 @@ const MainContent = () => {
       // Trigger shake animation for invalid guess
       setShakeRow(latestGuessIndex);
       setTimeout(() => setShakeRow(null), 500); // Clear shake state after animation
+      dispatch(
+        toastAdded({
+          title: "Invalid guess",
+          description: "Guess is not a valid word",
+          variant: "error",
+        })
+      );
       return; // Exit the function if the word is invalid
     }
-
     const newGuesses = [...guesses];
     // Directly assign the guess to the current row as an array of characters
     newGuesses[latestGuessIndex] = guess.split("");
@@ -45,6 +55,7 @@ const MainContent = () => {
         setShowDialog(true);
       }, 150 * 5); // Adjust this delay based on animation timing later
     }
+    handleInputChange("");
   };
 
   const resetGame = () => {

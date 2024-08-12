@@ -1,4 +1,3 @@
-import React from "react";
 import * as Toast from "@radix-ui/react-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { Toast as ToastType, ToastVariant } from "../../types/toastTypes";
@@ -6,10 +5,7 @@ import { Toast as ToastType, ToastVariant } from "../../types/toastTypes";
 import styled from "styled-components";
 
 import { RootState, AppDispatch } from "../../stores/store";
-
 import { toastRemoved } from "../../stores/slices/toastSlice";
-import UnstyledButton from "../UnstyledButton";
-
 const ToastProvider = () => {
   const toasts = useSelector((state: RootState) => state.toast.toasts);
 
@@ -55,7 +51,7 @@ const StyledToastRoot = styled(Toast.Root)<{ variant: ToastVariant }>`
 const StyledToastTitle = styled(Toast.Title)``;
 const StyledToastDescription = styled(Toast.Description)``;
 const StyledToastAction = styled(Toast.Action)``;
-const StyledButton = styled(UnstyledButton)``;
+const StyledButton = styled.span``;
 const StyledToastViewport = styled(Toast.Viewport)`
   position: fixed;
   bottom: 0;
