@@ -12,6 +12,7 @@ const toastSlice = createSlice({
     toastAdded: (state, action: PayloadAction<Omit<Toast, "id">>) => {
       state.toasts.push({ ...action.payload, id: crypto.randomUUID() });
     },
+    //mutating logic as immer is being used in rtk
     toastRemoved: (state, action: PayloadAction<string>) => {
       // Remove the toast by id
       state.toasts = state.toasts.filter(

@@ -1,5 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
+import { LETTER_ANIMATION_SPEED } from "../../../../constants";
 
 interface Props {
   guess: string;
@@ -7,6 +8,7 @@ interface Props {
   animate: boolean;
   correctLetter: string;
   showStyling: boolean;
+  correctWord: string;
 }
 
 const Letterbox = ({
@@ -14,18 +16,20 @@ const Letterbox = ({
   index,
   animate,
   correctLetter,
-  showStyling,
+  correctWord,
 }: Props) => {
   const isCorrect = guess === correctLetter;
-  const isMisplaced = !isCorrect && correctLetter.includes(guess);
+  const isMisplaced = !isCorrect && correctWord.includes(guess);
   const isIncorrect = !isCorrect && !isMisplaced;
   const [flipped, setFlipped] = useState(false);
+  const [showStyling, setShowStyling] = useState(false);
   // Trigger flip animation on guess submission
   useEffect(() => {
     if (animate) {
       const timer = setTimeout(() => {
         setFlipped(true);
-      }, index * 150); // Stagger the animation based on the index
+        setShowStyling(true);
+      }, index * LETTER_ANIMATION_SPEED); // Stagger the animation based on the index
       return () => clearTimeout(timer);
     } else {
       setFlipped(false); // Reset flip state when not animating
@@ -46,12 +50,18 @@ const Letterbox = ({
 };
 
 const flip = keyframes`
-    from {
-      transform: var(--flip, rotateY(0deg));
-    }
-    to {
-      transform: rotateY(180deg);
-    }
+   0% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    background: white;
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
   `;
 
 const Wrapper = styled.div<{
@@ -73,9 +83,9 @@ const Wrapper = styled.div<{
     !props.$showStyling
       ? "transparent"
       : props.$isCorrect
-      ? props.theme.correctColor
+      ? props.theme.correctInput
       : props.$isMisplaced
-      ? props.theme.misplacedColor
+      ? props.theme.misplacedInput
       : props.$isIncorrect
       ? props.theme.inputBorder
       : "transparent"};

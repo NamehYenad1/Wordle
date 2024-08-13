@@ -8,11 +8,18 @@ import Grid from "./Grid";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../stores/store";
 import { toastAdded } from "../../stores/slices/toastSlice";
+import { LETTER_ANIMATION_SPEED } from "../../constants";
 
-const MainContent = () => {
+interface Props {
+  gameKey: number;
+  setGameKey: React.Dispatch<React.SetStateAction<number>>;
+}
+const MainContent = ({ gameKey, setGameKey }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const [correctWord, setCorrectWord] = React.useState<string>(
-    wordsArray[Math.floor(Math.random() * wordsArray.length)].toUpperCase()
+  const correctWord = React.useMemo<string>(
+    () =>
+      wordsArray[Math.floor(Math.random() * wordsArray.length)].toUpperCase(),
+    [gameKey]
   );
   const [guesses, setGuesses] = React.useState<string[][]>(
     Array(6).fill(Array(5).fill("")) // Initialize 6 empty guesses
@@ -53,20 +60,14 @@ const MainContent = () => {
       setTimeout(() => {
         setShowConfetti(true);
         setShowDialog(true);
-      }, 150 * 5); // Adjust this delay based on animation timing later
+      }, LETTER_ANIMATION_SPEED * 5); // Adjust this delay based on animation timing later
     }
     handleInputChange("");
+    setTimeout(() => setAnimateRow(null), LETTER_ANIMATION_SPEED * 5); // reset animation so it doesnt run again
   };
 
   const resetGame = () => {
-    setCorrectWord(
-      wordsArray[Math.floor(Math.random() * wordsArray.length)].toUpperCase()
-    );
-    setGuesses(Array(6).fill(Array(5).fill("")));
-    setShowDialog(false);
-    setShowConfetti(false);
-    setCurrentGuess(""); // Reset current input
-    setAnimateRow(null); // Reset the animation row
+    setGameKey(gameKey + 1);
   };
 
   const handleInputChange = (value: string) => {

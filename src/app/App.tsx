@@ -12,7 +12,8 @@ import store from "../stores/store";
 import ToastProvider from "../components/Toast";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [gameKey, setGameKey] = useState<number>(0);
   const updateTheme = () => setDarkMode((previousTheme) => !previousTheme);
 
   return (
@@ -23,7 +24,11 @@ function App() {
           <GlobalStyle />
           <AppWrapper>
             <Header updateTheme={updateTheme}></Header>
-            <MainContent></MainContent>
+            <MainContent
+              key={gameKey}
+              gameKey={gameKey}
+              setGameKey={setGameKey}
+            ></MainContent>
             <Footer></Footer>
           </AppWrapper>
         </ThemeProvider>

@@ -12,6 +12,8 @@ import {
   greenDark,
   amberDark,
   blackA,
+  cyan,
+  cyanDark,
 } from "@radix-ui/colors";
 
 // Create your theme
@@ -32,8 +34,8 @@ export const theme = {
   backgroundColor: slate.slate1,
   headerColor: gray.gray1,
   inputColor: gray.gray12,
-  correctInput: green.green6,
-  misplacedInput: amber.amber6,
+  correctInput: cyan.cyan8,
+  misplacedInput: amber.amber9,
 };
 
 // Create your dark theme
@@ -55,8 +57,8 @@ export const darkTheme = {
   backgroundColor: slateDark.slate1,
   headerColor: grayDark.gray1,
   inputColor: grayDark.gray12,
-  correctInput: greenDark.green6,
-  misplacedInput: amberDark.amber6,
+  correctInput: cyanDark.cyan8,
+  misplacedInput: amberDark.amber9,
 };
 
 // Values in pixels:
@@ -77,6 +79,9 @@ export const IconSize = {
   sm: 16,
   md: 24,
 };
+
+//animation speed
+export const LETTER_ANIMATION_SPEED = 400;
 
 //words list
 

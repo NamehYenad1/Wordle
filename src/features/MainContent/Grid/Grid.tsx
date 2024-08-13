@@ -23,27 +23,31 @@ const Grid = ({
       <Wrapper>
         {guesses.map((guess, guessIndex) => (
           <RowWrapper
-            key={crypto.randomUUID()}
+            //stable key
+            key={guessIndex}
             $animateShake={shakeRow === guessIndex}
           >
             {Array.from({ length: 5 }, (_, index) =>
               latestGuessIndex === guessIndex ? (
                 <Letterbox
-                  key={crypto.randomUUID()}
+                  //stable key
+                  key={index}
                   guess={currentGuess[index] || ""}
                   index={index}
                   animate={guessIndex === animateRow}
                   correctLetter={correctWord[index]}
                   showStyling={false}
+                  correctWord={correctWord}
                 />
               ) : (
                 <Letterbox
-                  key={crypto.randomUUID()}
+                  key={index}
                   guess={guess[index] || ""}
                   index={index}
                   animate={guessIndex === animateRow}
                   correctLetter={correctWord[index]}
                   showStyling={true}
+                  correctWord={correctWord}
                 />
               )
             )}
