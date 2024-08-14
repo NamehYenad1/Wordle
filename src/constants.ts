@@ -28,6 +28,7 @@ export const theme = {
   iconColor: gray.gray11,
   iconBackground: gray.gray3,
   overlayColors: blackA.blackA7,
+  overlayContentBackground: gray.gray2,
   focusRing: blue.blue7,
   inputBackground: gray.gray1,
   inputBorder: gray.gray6,

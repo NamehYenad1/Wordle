@@ -1,14 +1,16 @@
 import * as Toast from "@radix-ui/react-toast";
-import { useSelector, useDispatch } from "react-redux";
 import { Toast as ToastType, ToastVariant } from "../../types/toastTypes";
 import styled from "styled-components";
-import { RootState, AppDispatch } from "../../stores/store";
 import { toastRemoved } from "../../stores/slices/toastSlice";
+import {
+  useSelectorWithType,
+  useDispatchWithType,
+} from "../../hooks/reduxHooks";
 
 const ToastProvider = () => {
-  const toasts = useSelector((state: RootState) => state.toast.toasts);
+  const toasts = useSelectorWithType((state) => state.toast.toasts);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatchWithType();
 
   return (
     <Toast.Provider swipeDirection="right">

@@ -2,20 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import InputForm from "./InputForm";
 import { wordsArray, wordsSet } from "../../constants";
-import Confetti from "react-confetti";
+
 import Dialog from "../../components/Dialog";
 import Grid from "./Grid";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../stores/store";
+import { useDispatchWithType } from "../../hooks/reduxHooks";
 import { toastAdded } from "../../stores/slices/toastSlice";
 import { LETTER_ANIMATION_SPEED } from "../../constants";
-
+import { confettiToggled } from "../../stores/slices/confettiSlice";
 interface Props {
   gameKey: number;
   setGameKey: React.Dispatch<React.SetStateAction<number>>;
 }
 const MainContent = ({ gameKey, setGameKey }: Props) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatchWithType();
   const correctWord = React.useMemo<string>(
     () =>
       wordsArray[Math.floor(Math.random() * wordsArray.length)].toUpperCase(),
@@ -25,7 +24,6 @@ const MainContent = ({ gameKey, setGameKey }: Props) => {
     Array(6).fill(Array(5).fill("")) // Initialize 6 empty guesses
   );
 
-  const [showConfetti, setShowConfetti] = React.useState<boolean>(false);
   const [showDialog, setShowDialog] = React.useState<boolean>(false);
   const [currentGuess, setCurrentGuess] = React.useState<string>(""); // Track current input
   const [animateRow, setAnimateRow] = React.useState<number | null>(null); // Track which row to animate
@@ -58,7 +56,7 @@ const MainContent = ({ gameKey, setGameKey }: Props) => {
     // Delay showing the dialog until after the animation
     if (guess === correctWord) {
       setTimeout(() => {
-        setShowConfetti(true);
+        dispatch(confettiToggled(true));
         setShowDialog(true);
       }, LETTER_ANIMATION_SPEED * 5); // Adjust this delay based on animation timing later
     }
@@ -67,6 +65,7 @@ const MainContent = ({ gameKey, setGameKey }: Props) => {
   };
 
   const resetGame = () => {
+    dispatch(confettiToggled(false));
     setGameKey(gameKey + 1);
   };
 
@@ -75,8 +74,10 @@ const MainContent = ({ gameKey, setGameKey }: Props) => {
   };
 
   const onOpenChange = (open: boolean) => {
+    console.log("open changed");
     setShowDialog(open);
-    setShowConfetti(false);
+    dispatch(confettiToggled(open));
+    setGameKey(gameKey + 1);
   };
 
   return (
@@ -103,7 +104,6 @@ const MainContent = ({ gameKey, setGameKey }: Props) => {
         you have guessed the right answer{" "}
         <button onClick={resetGame}> play again </button>
       </Dialog>
-      {showConfetti && <Confetti recycle={true} numberOfPieces={2000} />}
     </Wrapper>
   );
 };

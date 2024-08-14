@@ -19,7 +19,9 @@ const Letterbox = ({
   correctWord,
 }: Props) => {
   const isCorrect = guess === correctLetter;
+
   const isMisplaced = !isCorrect && correctWord.includes(guess);
+  console.log("isMisplaced", isMisplaced, guess, correctWord);
   const isIncorrect = !isCorrect && !isMisplaced;
   const [flipped, setFlipped] = useState(false);
   const [showStyling, setShowStyling] = useState(false);
